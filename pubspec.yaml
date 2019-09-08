@@ -1,0 +1,38 @@
+name: vbx
+description: A new Flutter project.
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^0.1.2
+  azlistview: ^0.1.2
+  lpinyin: ^1.0.7
+  badges: ^1.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+
+  assets :
+  - assets/image/avatar/a1.png
+  - assets/image/avatar/a2.png
+  - assets/image/avatar/a3.png
+  - assets/image/avatar/a4.png
+  - assets/image/avatar/a5.png
+  - assets/image/avatar/a6.png
+  - assets/image/avatar/lsq.png
+  - assets/image/avatar/yyh.png
+  - assets/image/avatar/lz.png
+  - assets/image/icons/new.png
+  - assets/image/icons/group.png
+  - assets/data/friends.json
+  - assets/data/recentSuggest.json
+  - assets/data/searchList.json
