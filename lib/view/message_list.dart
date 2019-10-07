@@ -38,7 +38,7 @@ class _MessageListState extends State<MessageList> {
                 height: 64,
                 decoration: BoxDecoration(
                     border: Border(
-                  bottom: BorderSide(color: Colors.grey[500], width: .5),
+                  bottom: BorderSide(color: Colors.grey[400], width: .3),
                 )),
                 child: Row(
                   children: <Widget>[

@@ -10,14 +10,13 @@ class MyApp extends StatefulWidget {
 }
 
 class _StateMyApp extends State<MyApp> {
-
   int _index = 0;
   bool _badge = false;
   String _unread = "";
 
   _onTap(int index) {
     setState(() {
-     _index = index;
+      _index = index;
     });
   }
 
@@ -42,9 +41,12 @@ class _StateMyApp extends State<MyApp> {
               ),
               title: Text('消息'),
             ),
-            BottomNavigationBarItem(icon: Icon(Icons.people_outline),title: Text('联系人')),
-            BottomNavigationBarItem(icon: Icon(Icons.explore),title: Text('发现')),
-            BottomNavigationBarItem(icon: Icon(Icons.person_outline),title: Text('我的')),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.people_outline), title: Text('联系人')),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.explore), title: Text('发现')),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.person_outline), title: Text('我的')),
           ],
         ),
         body: pages[_index],

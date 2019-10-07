@@ -33,6 +33,13 @@ flutter:
   - assets/image/avatar/lz.png
   - assets/image/icons/new.png
   - assets/image/icons/group.png
+  - assets/image/icons/star.png
+  - assets/image/icons/album.png
+  - assets/image/icons/setting.png
+  - assets/image/topic/t1.jpg
+  - assets/image/topic/t2.jpg
+  - assets/image/topic/t3.jpg
+  - assets/image/topic/t4.jpg
   - assets/data/friends.json
   - assets/data/recentSuggest.json
   - assets/data/searchList.json
