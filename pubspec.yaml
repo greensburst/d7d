@@ -13,6 +13,7 @@ dependencies:
   azlistview: ^0.1.2
   lpinyin: ^1.0.7
   badges: ^1.1.0
+  image_picker: ^0.6.1
 
 dev_dependencies:
   flutter_test:
@@ -40,6 +41,7 @@ flutter:
   - assets/image/topic/t2.jpg
   - assets/image/topic/t3.jpg
   - assets/image/topic/t4.jpg
+  - assets/image/paper/default.png
   - assets/data/friends.json
   - assets/data/recentSuggest.json
   - assets/data/searchList.json
