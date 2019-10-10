@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import '../model/user.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -17,7 +19,23 @@ class _SignUpState extends State<SignUp> {
     });
   }
 
-  String _mail = "";
+  String _mail = null;
+  String _nickname = null;
+  String _password = null;
+
+  User u = User(
+    mail: null,
+    nickname: null,
+    password: null,
+  );
+
+  _onsubmit() {
+    Socket.connect("192.168.31.104", 8888).then((Socket sock) {
+      String signupinfo = json.encode(u.toJson());
+      sock.write(signupinfo);
+      sock.close();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,12 +61,18 @@ class _SignUpState extends State<SignUp> {
                 Expanded(
                   child: TextField(
                     onChanged: (v) {
-                      print(v);
+                      u.nickname = v;
                     },
                     decoration: InputDecoration(
                       labelText: "昵称",
                       prefixIcon: Icon(Icons.perm_identity),
                       hintText: "例如：韩梅梅",
+                      errorText: u.nickname == "" 
+                                ? "昵称不能为空" 
+                                : null,
+                      errorStyle: TextStyle(
+                        
+                      ),
                     ),
                   ),
                 ),
@@ -75,25 +99,32 @@ class _SignUpState extends State<SignUp> {
               // padding: EdgeInsets.only(left: 20, right: 20),
               child: TextField(
                 onChanged: (v) {
-                  _mail = v;
+                  u.mail = v;
                 },
                 decoration: InputDecoration(
                   labelText: "邮箱",
                   prefixIcon: Icon(Icons.email),
                   hintText: "请填写邮箱",
+                  errorText: u.mail == "" 
+                            ? "邮箱不能为空" 
+                            : null,
                 ),
               ),
             ),
             Container(
               margin: EdgeInsets.only(bottom: 40),
               child: TextField(
-                obscureText: true,
+                // obscureText: true,
                 onChanged: (v) {
+                    u.password = v;
                 },
                 decoration: InputDecoration(
                   labelText: "密码",
                   prefixIcon: Icon(Icons.lock),
                   hintText: "填写密码",
+                  errorText: u.password == "" 
+                          ? "密码不能为空" 
+                          : null,
                 ),
               ),
             ),
@@ -108,8 +139,8 @@ class _SignUpState extends State<SignUp> {
               ),
               disabledColor: Color.fromRGBO(224, 224, 224, 1),
               disabledTextColor: Color.fromRGBO(180, 180, 180, 1),
-              onPressed: _mail == "123"
-                        ? () {} 
+              onPressed: u.nickname != null && u.mail != null && u.password != null && u.nickname != "" && u.mail != "" && u.password != ""
+                        ? _onsubmit
                         : null,
             ),
           ],
