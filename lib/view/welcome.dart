@@ -29,7 +29,9 @@ class Welcome extends StatelessWidget {
                     color: Color.fromRGBO(6, 192, 95, 1),
                     textColor: Colors.white,
                     child: Text("登录"),
-                    onPressed: (){},
+                    onPressed: (){
+                      Navigator.of(context).pushNamed('/signin');
+                    },
                   ),
                 ),
                 Container(

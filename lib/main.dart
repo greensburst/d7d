@@ -1,6 +1,7 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:vbx/route.dart';
+import 'package:vbx/view/sign_in.dart';
 import 'package:vbx/view/sign_up.dart';
 import './view/welcome.dart';
 
@@ -31,6 +32,7 @@ class _StateMyApp extends State<MyApp> {
       routes: {
         '/': (context) => Welcome(),
         '/signup':(context) => SignUp(),
+        '/signin':(context) => SignIn(),
       },
       // home: Scaffold(
       //   bottomNavigationBar: BottomNavigationBar(

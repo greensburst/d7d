@@ -19,10 +19,6 @@ class _SignUpState extends State<SignUp> {
     });
   }
 
-  String _mail = null;
-  String _nickname = null;
-  String _password = null;
-
   User u = User(
     mail: null,
     nickname: null,
@@ -30,10 +26,15 @@ class _SignUpState extends State<SignUp> {
   );
 
   _onsubmit() {
-    Socket.connect("192.168.31.104", 8888).then((Socket sock) {
+    Socket.connect("192.168.31.104", 8888).then((Socket sock1) {
+      Socket sock2;
       String signupinfo = json.encode(u.toJson());
-      sock.write(signupinfo);
-      sock.close();
+      sock1.write(signupinfo);
+      sock1.close();
+      sock2.listen((data){
+        print(utf8.decode(data));
+      });
+      sock2.close();
     });
   }
 
@@ -114,7 +115,7 @@ class _SignUpState extends State<SignUp> {
             Container(
               margin: EdgeInsets.only(bottom: 40),
               child: TextField(
-                // obscureText: true,
+                obscureText: true,
                 onChanged: (v) {
                     u.password = v;
                 },
