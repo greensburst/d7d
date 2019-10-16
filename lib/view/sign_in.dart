@@ -17,19 +17,17 @@ class _SignInState extends State<SignIn> {
   );
 
   _onsubmit() {
-    Socket.connect("192.168.31.104", 8888).then((Socket sock1) {
-      Socket sock2;
+    Socket.connect("192.168.31.104", 8888).then((Socket socket) {
       String signupinfo = json.encode(u.toJson());
-      sock1.write(signupinfo);
-      sock1.listen((data) {
-        sock1.write(data);
+      socket.write(signupinfo);
+      socket.listen((res) {
+        if (utf8.decode(res) == "access") {
+          Navigator.of(context).pushNamedAndRemoveUntil('/home',(route) => route == null);
+        } else {
+          print("账号或密码错误！");
+        }
       });
-      sock1.close();
-      // sock2.listen((data){
-      //   print(data);
-      //   print("666");
-      // });
-      // sock2.close();
+      socket.close();
     });
   }
 
