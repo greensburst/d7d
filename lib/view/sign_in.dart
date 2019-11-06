@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../model/user.dart';
 import 'dart:io';
 import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignIn extends StatefulWidget {
   @override
@@ -16,19 +17,29 @@ class _SignInState extends State<SignIn> {
     password: null,
   );
 
-  _onsubmit() {
-    Socket.connect("192.168.31.104", 8888).then((Socket socket) {
-      String signupinfo = json.encode(u.toJson());
-      socket.write(signupinfo);
-      socket.listen((res) {
-        if (utf8.decode(res) == "access") {
-          Navigator.of(context).pushNamedAndRemoveUntil('/home',(route) => route == null);
-        } else {
-          print("账号或密码错误！");
-        }
-      });
-      socket.close();
-    });
+  save() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString("islogin", "yes");
+  }
+
+  _onsubmit(){
+    if(u.mail == "116@qq.com" && u.password == "123") {
+      save();
+      Navigator.of(context).pushNamedAndRemoveUntil('/home',(route) => route == null);
+    }
+    // Socket.connect("192.168.31.104", 8888).then((Socket socket) {
+    //   String signupinfo = json.encode(u.toJson());
+    //   socket.write(signupinfo);
+    //   socket.listen((res) {
+    //     if (utf8.decode(res) == "access") {
+    //       _signmanager();
+    //       Navigator.of(context).pushNamedAndRemoveUntil('/home',(route) => route == null);
+    //     } else {
+    //       print("账号或密码错误！");
+    //     }
+    //   });
+    //   socket.close();
+    // });
   }
 
   @override

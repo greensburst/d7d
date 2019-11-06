@@ -1,11 +1,10 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:vbx/route.dart';
+import 'package:vbx/view/loading.dart';
 import 'package:vbx/view/sign_in.dart';
 import 'package:vbx/view/sign_up.dart';
 import './view/welcome.dart';
-import 'dart:io';
-import 'dart:convert';
 
 void main() => runApp(MyApp());
 
@@ -19,28 +18,26 @@ class _StateMyApp extends State<MyApp> {
   bool _badge = false;
   String _unread = "";
 
-  _onTap(int index) {
-    setState(() {
-      _index = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "vbx",
       initialRoute: '/',
       routes: {
-        '/': (context) => Welcome(),
+        '/': (context) => Loading(),
+        '/wel': (context) => Welcome(),
         '/signup': (context) => SignUp(),
         '/signin': (context) => SignIn(),
         '/home': (context) => Scaffold(
               bottomNavigationBar: BottomNavigationBar(
                 backgroundColor: Color.fromRGBO(247, 247, 247, 1),
                 currentIndex: _index,
-                onTap: _onTap,
+                onTap: (index) {
+                  setState(() {
+                    _index = index;
+                  });
+                },
                 type: BottomNavigationBarType.fixed,
                 fixedColor: Colors.green,
                 items: [

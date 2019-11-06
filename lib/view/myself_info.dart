@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MyselfInfo extends StatefulWidget {
   @override
@@ -163,7 +164,7 @@ class _MyselfInfoState extends State<MyselfInfo> {
           ),
         ),
         Container(
-          margin: EdgeInsets.only(top: 12),
+          margin: EdgeInsets.only(top: 12,bottom: 20),
           child: Material(
             color: Colors.white,
             child: InkWell(
@@ -208,6 +209,24 @@ class _MyselfInfoState extends State<MyselfInfo> {
                 ],
               ),
             ),
+          ),
+        ),
+        Container(
+          height: 40,
+          width: 100,
+          child: RaisedButton(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5),
+            ),
+            color: Colors.white,
+            textColor: Color.fromRGBO(6, 192, 95, 1),
+            child: Text("退出"),
+            onPressed: () async {
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+              prefs.setString("islogin", "no");
+              Navigator.of(context)
+                  .pushNamedAndRemoveUntil('/wel', (route) => route == null);
+            },
           ),
         ),
       ],

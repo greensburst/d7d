@@ -14,6 +14,7 @@ dependencies:
   lpinyin: ^1.0.7
   badges: ^1.1.0
   image_picker: ^0.6.1
+  shared_preferences: ^0.5.4+3
 
 dev_dependencies:
   flutter_test:
@@ -45,3 +46,4 @@ flutter:
   - assets/data/friends.json
   - assets/data/recentSuggest.json
   - assets/data/searchList.json
+  - assets/image/paper/loading.jpeg

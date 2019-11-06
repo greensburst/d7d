@@ -6,7 +6,7 @@ class Welcome extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("assets/image/paper/default.png"),
+          image: AssetImage("assets/image/paper/loading.jpeg"),
           fit: BoxFit.cover,
         ),
       ),
