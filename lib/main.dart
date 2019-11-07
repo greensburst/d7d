@@ -5,6 +5,7 @@ import 'package:vbx/view/loading.dart';
 import 'package:vbx/view/sign_in.dart';
 import 'package:vbx/view/sign_up.dart';
 import './view/welcome.dart';
+import './view/message_inner.dart';
 
 void main() => runApp(MyApp());
 
@@ -29,6 +30,7 @@ class _StateMyApp extends State<MyApp> {
         '/wel': (context) => Welcome(),
         '/signup': (context) => SignUp(),
         '/signin': (context) => SignIn(),
+        '/minner':(context) => MessInner(),
         '/home': (context) => Scaffold(
               bottomNavigationBar: BottomNavigationBar(
                 backgroundColor: Color.fromRGBO(247, 247, 247, 1),

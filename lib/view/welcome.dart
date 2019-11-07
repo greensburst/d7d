@@ -45,10 +45,6 @@ class Welcome extends StatelessWidget {
                     textColor: Color.fromRGBO(6, 192, 95, 1),
                     child: Text("注册"),
                     onPressed: (){
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(builder: (context) => SignUp()),
-                      // );
                       Navigator.of(context).pushNamed('/signup');
                     },
                   ),
