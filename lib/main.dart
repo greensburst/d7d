@@ -1,6 +1,7 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:vbx/route.dart';
+import 'package:vbx/view/contact_inner.dart';
 import 'package:vbx/view/loading.dart';
 import 'package:vbx/view/sign_in.dart';
 import 'package:vbx/view/sign_up.dart';
@@ -31,6 +32,7 @@ class _StateMyApp extends State<MyApp> {
         '/signup': (context) => SignUp(),
         '/signin': (context) => SignIn(),
         '/minner':(context) => MessInner(),
+        '/cinner':(context)=>ContInner(),
         '/home': (context) => Scaffold(
               bottomNavigationBar: BottomNavigationBar(
                 backgroundColor: Color.fromRGBO(247, 247, 247, 1),

@@ -104,6 +104,7 @@ class _ContactListState extends State<ContactList> {
             ),  
             title: Text(model.remarks),
             onTap: () {
+              Navigator.pushNamed(context, '/cinner', arguments: model);
             },
           ),
         )

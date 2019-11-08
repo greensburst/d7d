@@ -9,7 +9,7 @@ class ContactInfo extends ISuspensionBean {
     this.nickname,
   });
 
-  String remarks;
+  String remarks; //备注？我自己都忘了...
   String avatar;
   String namepy;
   String tag;

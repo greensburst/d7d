@@ -32,7 +32,7 @@ class _MyselfInfoState extends State<MyselfInfo> {
                 Expanded(
                   flex: 1,
                   child: Container(
-                    height: 96,
+                    height: 76,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.start,

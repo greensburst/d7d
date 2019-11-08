@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'message_list.dart';
+import '../model/conversation.dart';
 
 class MessInner extends StatefulWidget {
   @override
@@ -8,15 +8,19 @@ class MessInner extends StatefulWidget {
 
 class _MessInnerState extends State<MessInner> {
   var _content = "";
+  var _avatar = "";
+  var _selfavatar = "assets/image/avatar/lsq.png";
   List<Msg> _messages = <Msg>[];
   final TextEditingController _textController = new TextEditingController();
 
   _send(String v) {
     Msg msg = new Msg(
       content: v,
+      avatar: _selfavatar,
     );
     setState(() {
-      _messages.insert(0, msg);
+      // _messages.insert(0, msg);
+      _messages.add(msg);
     });
     _textController.clear();
   }
@@ -24,6 +28,7 @@ class _MessInnerState extends State<MessInner> {
   @override
   Widget build(BuildContext context) {
     final Conv conv = ModalRoute.of(context).settings.arguments;
+    _avatar = conv.avatar;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(236, 236, 236, 1),
@@ -63,12 +68,12 @@ class _MessInnerState extends State<MessInner> {
               color: Color.fromRGBO(228, 228, 228, 1),
               // child: ChatPage(),
               child: Column(children: <Widget>[
-                Flexible(
+                Expanded(
                     child: ListView.builder(
-                      itemBuilder: (_, int index) => _messages[index],
-                      itemCount: _messages.length,
-                      reverse: true,
-                      padding: new EdgeInsets.all(6.0),
+                  itemBuilder: (_, int index) => _messages[index],
+                  itemCount: _messages.length,
+                  reverse: false,
+                  padding: new EdgeInsets.all(6.0),
                 )),
               ]),
             ),
@@ -114,7 +119,7 @@ class _MessInnerState extends State<MessInner> {
                   width: 72,
                   margin: EdgeInsets.only(right: 8, left: 8),
                   child: FlatButton(
-                    onPressed: (){
+                    onPressed: () {
                       _send(_content);
                     },
                     child: Text("发送"),
@@ -134,26 +139,46 @@ class _MessInnerState extends State<MessInner> {
 }
 
 class Msg extends StatelessWidget {
-
-  Msg({this.content});
+  Msg({this.content, this.avatar});
   String content;
+  String avatar;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text(content),
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: <Widget>[
+        Flexible(
+          child: Container(
+            constraints: BoxConstraints(
+              minHeight: 36,
+            ),
+            padding: EdgeInsets.all(9),
+            margin: EdgeInsets.only(left: 50,bottom: 10),
+            child: Text(
+              content,
+              softWrap: true,
+            ),
+            decoration: BoxDecoration(
+              color: Color.fromRGBO(149, 236, 105, 1),
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  bottomLeft: Radius.circular(10),
+                  bottomRight: Radius.circular(10)),
+            ),
+          ),
+        ),
+        Container(
+          height: 36,
+          width: 36,
+          margin: EdgeInsets.only(left: 10, right: 10, bottom: 10),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5.0),
+            image: DecorationImage(image: AssetImage(avatar)),
+          ),
+        ),
+      ],
     );
   }
-}
-
-class Blink {
-  Blink({
-    this.avatar,
-    this.content,
-    this.who,
-  });
-
-  String avatar;
-  String content;
-  String who;
 }
