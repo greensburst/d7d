@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:vbx/route.dart';
 import 'package:vbx/view/contact_inner.dart';
 import 'package:vbx/view/loading.dart';
+import 'package:vbx/view/setting.dart';
 import 'package:vbx/view/sign_in.dart';
 import 'package:vbx/view/sign_up.dart';
 import './view/welcome.dart';
@@ -24,7 +25,7 @@ class _StateMyApp extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: "vbx",
+      title: "鸽子",
       initialRoute: '/',
       routes: {
         '/': (context) => Loading(),
@@ -33,6 +34,7 @@ class _StateMyApp extends State<MyApp> {
         '/signin': (context) => SignIn(),
         '/minner':(context) => MessInner(),
         '/cinner':(context)=>ContInner(),
+        '/set':(context)=>Setting(),
         '/home': (context) => Scaffold(
               bottomNavigationBar: BottomNavigationBar(
                 backgroundColor: Color.fromRGBO(247, 247, 247, 1),

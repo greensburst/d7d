@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class MyselfInfo extends StatefulWidget {
   @override
@@ -49,7 +48,7 @@ class _MyselfInfoState extends State<MyselfInfo> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
                             Text(
-                              "vbxid:10010",
+                              "鸽子号:10010",
                               style: TextStyle(
                                   color: Color.fromRGBO(135, 139, 153, 1),
                                   fontSize: 13.0),
@@ -168,7 +167,9 @@ class _MyselfInfoState extends State<MyselfInfo> {
           child: Material(
             color: Colors.white,
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context, '/set');
+              },
               splashColor: Colors.grey.withOpacity(0.3),
               highlightColor: Colors.grey.withOpacity(0.1),
               child: Row(
@@ -211,24 +212,24 @@ class _MyselfInfoState extends State<MyselfInfo> {
             ),
           ),
         ),
-        Container(
-          height: 40,
-          width: 100,
-          child: RaisedButton(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(5),
-            ),
-            color: Colors.white,
-            textColor: Color.fromRGBO(6, 192, 95, 1),
-            child: Text("退出"),
-            onPressed: () async {
-              SharedPreferences prefs = await SharedPreferences.getInstance();
-              prefs.setString("islogin", "no");
-              Navigator.of(context)
-                  .pushNamedAndRemoveUntil('/wel', (route) => route == null);
-            },
-          ),
-        ),
+        // Container(
+        //   height: 40,
+        //   width: 100,
+        //   child: RaisedButton(
+        //     shape: RoundedRectangleBorder(
+        //       borderRadius: BorderRadius.circular(5),
+        //     ),
+        //     color: Colors.white,
+        //     textColor: Color.fromRGBO(6, 192, 95, 1),
+        //     child: Text("退出"),
+        //     onPressed: () async {
+        //       SharedPreferences prefs = await SharedPreferences.getInstance();
+        //       prefs.setString("islogin", "no");
+        //       Navigator.of(context)
+        //           .pushNamedAndRemoveUntil('/wel', (route) => route == null);
+        //     },
+        //   ),
+        // ),
       ],
     );
   }
