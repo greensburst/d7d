@@ -2,7 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import '../model/user.dart';
+import 'package:vbx/model/protocol.dart';
+import 'package:toast/toast.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -19,24 +20,32 @@ class _SignUpState extends State<SignUp> {
     });
   }
 
-  User u = User(
-    mail: null,
-    nickname: null,
-    password: null,
-  );
+  SignupInfo suinfo = SignupInfo();
 
   _onsubmit() {
-    Socket.connect("192.168.31.104", 8888).then((Socket sock1) {
-      Socket sock2;
-      String signupinfo = json.encode(u.toJson());
-      sock1.write(signupinfo);
-      sock1.close();
-      sock2.listen((data){
-        print(utf8.decode(data));
+    Package pkg = Package();
+    pkg.code = 0;
+    pkg.body = json.encode(suinfo.toJson());
+    Socket.connect("192.168.31.104", 8888).then((Socket sock) {
+      String pkginfo = json.encode(pkg.toJson());
+      sock.write(pkginfo);
+      sock.listen((data){
+        // print(utf8.decode(data));
+        if(utf8.decode(data) == "1") {
+          Toast.show("注册成功!",context);
+          Future.delayed(Duration(seconds: 1), () {
+            Navigator.of(context).pushNamedAndRemoveUntil('/signin',(route) => route == null);
+          });
+        } else if(utf8.decode(data) == "0") {
+          print("fail!!!!!");
+          Toast.show("注册失败!",context);
+        }
       });
-      sock2.close();
+      sock.close();
     });
   }
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -62,13 +71,13 @@ class _SignUpState extends State<SignUp> {
                 Expanded(
                   child: TextField(
                     onChanged: (v) {
-                      u.nickname = v;
+                      suinfo.name = v;
                     },
                     decoration: InputDecoration(
                       labelText: "昵称",
                       prefixIcon: Icon(Icons.perm_identity),
                       hintText: "例如：韩梅梅",
-                      errorText: u.nickname == "" 
+                      errorText: suinfo.name == "" 
                                 ? "昵称不能为空" 
                                 : null,
                       errorStyle: TextStyle(
@@ -78,13 +87,16 @@ class _SignUpState extends State<SignUp> {
                   ),
                 ),
                 Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(width: 1,color: Colors.grey)
+                  ),
                   margin: EdgeInsets.only(left: 10),
                   width: 60,
                   height: 60,
                   child:_image == null
                       ? IconButton(
                           icon: Icon(
-                            Icons.add_photo_alternate,
+                            Icons.album,
                             color: Color.fromRGBO(129, 129, 129, 1),
                           ),
                           iconSize: 40,
@@ -100,13 +112,13 @@ class _SignUpState extends State<SignUp> {
               // padding: EdgeInsets.only(left: 20, right: 20),
               child: TextField(
                 onChanged: (v) {
-                  u.mail = v;
+                  suinfo.mail = v;
                 },
                 decoration: InputDecoration(
                   labelText: "邮箱",
                   prefixIcon: Icon(Icons.email),
                   hintText: "请填写邮箱",
-                  errorText: u.mail == "" 
+                  errorText: suinfo.mail == "" 
                             ? "邮箱不能为空" 
                             : null,
                 ),
@@ -117,13 +129,13 @@ class _SignUpState extends State<SignUp> {
               child: TextField(
                 obscureText: true,
                 onChanged: (v) {
-                    u.password = v;
+                    suinfo.passwd = v;
                 },
                 decoration: InputDecoration(
                   labelText: "密码",
                   prefixIcon: Icon(Icons.lock),
                   hintText: "填写密码",
-                  errorText: u.password == "" 
+                  errorText: suinfo.passwd == "" 
                           ? "密码不能为空" 
                           : null,
                 ),
@@ -140,7 +152,7 @@ class _SignUpState extends State<SignUp> {
               ),
               disabledColor: Color.fromRGBO(224, 224, 224, 1),
               disabledTextColor: Color.fromRGBO(180, 180, 180, 1),
-              onPressed: u.nickname != null && u.mail != null && u.password != null && u.nickname != "" && u.mail != "" && u.password != ""
+              onPressed: suinfo.name != null && suinfo.mail != null && suinfo.passwd != null && suinfo.name != "" && suinfo.mail != "" && suinfo.passwd != ""
                         ? _onsubmit
                         : null,
             ),
