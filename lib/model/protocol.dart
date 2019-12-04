@@ -1,17 +1,17 @@
-class Package {
+class RequestPackage {
   int code;
   String target;
   String source;
   String body;
 
-  Package({
+  RequestPackage({
     this.code,
     this.target,
     this.source,
     this.body,
   });
 
-  Package.fromJson(Map<String, dynamic> json) {
+  RequestPackage.fromJson(Map<String, dynamic> json) {
     code = json['code'];
     target = json['target'];
     source = json['source'];
@@ -22,6 +22,26 @@ class Package {
     'code': code,
     'target': target,
     'source': source,
+    'body': body,
+  };
+}
+
+class ResponsePackage {
+  int code;
+  String body;
+
+  ResponsePackage({
+    this.code,
+    this.body,
+  });
+
+  ResponsePackage.fromJson(Map<String, dynamic> json) {
+    code = json['code'];
+    body = json['body'];
+  }
+
+  Map<String, dynamic> toJson() => {
+    'code': code,
     'body': body,
   };
 }

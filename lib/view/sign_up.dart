@@ -23,21 +23,23 @@ class _SignUpState extends State<SignUp> {
   SignupInfo suinfo = SignupInfo();
 
   _onsubmit() {
-    Package pkg = Package();
+    RequestPackage pkg = RequestPackage();
     pkg.code = 0;
     pkg.body = json.encode(suinfo.toJson());
     Socket.connect("192.168.31.104", 8888).then((Socket sock) {
       String pkginfo = json.encode(pkg.toJson());
       sock.write(pkginfo);
       sock.listen((data){
-        // print(utf8.decode(data));
-        if(utf8.decode(data) == "1") {
+        Map resmap = json.decode(utf8.decode(data));
+        var res = new ResponsePackage.fromJson(resmap);
+        if(res.code == 200) {
           Toast.show("注册成功!",context);
           Future.delayed(Duration(seconds: 1), () {
             Navigator.of(context).pushNamedAndRemoveUntil('/signin',(route) => route == null);
-          });
-        } else if(utf8.decode(data) == "0") {
-          print("fail!!!!!");
+          });          
+        } else if(res.code == 201) {
+          Toast.show("该邮箱已被注册!",context);
+        } else if(res.code == 501) {
           Toast.show("注册失败!",context);
         }
       });
