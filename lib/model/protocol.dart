@@ -69,3 +69,23 @@ class SignupInfo {
         'name': name,
       };
 }
+
+class SigninInfo {
+  String account;
+  String passwd;
+
+  SigninInfo({
+    this.account,
+    this.passwd,
+  });
+
+  SigninInfo.fromJson(Map<String, dynamic> json) {
+    account = json['account'];
+    passwd = json['passwd'];
+  }
+
+  Map<String, dynamic> toJson() => {
+        'account': account,
+        'passwd': passwd,
+      };
+}

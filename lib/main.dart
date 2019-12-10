@@ -43,6 +43,7 @@ class _StateMyApp extends State<MyApp> {
                   setState(() {
                     _index = index;
                   });
+                  
                 },
                 type: BottomNavigationBarType.fixed,
                 fixedColor: Colors.green,

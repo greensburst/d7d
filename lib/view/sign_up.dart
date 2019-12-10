@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:vbx/model/connection.dart';
 import 'package:vbx/model/protocol.dart';
 import 'package:toast/toast.dart';
 
@@ -26,7 +27,7 @@ class _SignUpState extends State<SignUp> {
     RequestPackage pkg = RequestPackage();
     pkg.code = 0;
     pkg.body = json.encode(suinfo.toJson());
-    Socket.connect("192.168.31.104", 8888).then((Socket sock) {
+    Socket.connect(IpAddress, Port).then((Socket sock) {
       String pkginfo = json.encode(pkg.toJson());
       sock.write(pkginfo);
       sock.listen((data){
@@ -37,9 +38,9 @@ class _SignUpState extends State<SignUp> {
           Future.delayed(Duration(seconds: 1), () {
             Navigator.of(context).pushNamedAndRemoveUntil('/signin',(route) => route == null);
           });          
-        } else if(res.code == 201) {
+        } else if(res.code == 401) {
           Toast.show("该邮箱已被注册!",context);
-        } else if(res.code == 501) {
+        } else if(res.code == 500) {
           Toast.show("注册失败!",context);
         }
       });
